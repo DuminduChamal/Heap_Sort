@@ -10,11 +10,11 @@ void heapify(int array[], int i, int n)
 	int max=i;
 	int left=2*i;
 	int right=2*i+1;
-	if((left<n) && (array[left]>array[max]))
+	if((left<=n) && (array[left]>array[max]))
 	{
 		max=left;
 	}
-	if((right<n) && (array[right]>array[max]))
+	if((right<=n) && (array[right]>array[max]))
 	{
 		max=right;	
 	}
@@ -60,10 +60,13 @@ void enque(int value, int array[], int size)
 
 void dequeue(int array[], int size)
 {
+	int j=count;
 	int temp = array[1];
-	array[1]=array[i];
-	array[i]=temp;
-	heapify(array,1,i);
+	array[1]=array[j];
+	array[j]=temp;
+	count--;
+	heapify(array,1,count);
+	printf("Deleted element : %d\n",temp);
 }
 
 void getTheHighest(int array[], int size)
@@ -92,7 +95,6 @@ int main()
 				enque(val,array,count);
 				break;
 			case 2:
-				count--;
 				dequeue(array,count);
 				printf("Queue after deletion : ");
 				for (i=1; i<=count; ++i)
