@@ -2,6 +2,8 @@
 #include<stdlib.h>
 
 int i=0;
+int size=10;
+int count=0;
 
 void heapify(int array[], int i, int n)
 {
@@ -52,7 +54,8 @@ void enque(int value, int array[], int size)
 {
 	i++;
 	array[i]=value;
-	buildHeap(array,size);
+	buildHeap(array,count);
+	heapify(array,1,i);
 }
 
 void dequeue(int array[], int size)
@@ -65,37 +68,50 @@ void dequeue(int array[], int size)
 
 void getTheHighest(int array[], int size)
 {
-	printf("\nHighest value in the Queue : %d ",array[1]);
+	printf("Highest value in the Queue : %d \n",array[1]);
 }
 
-int size=10;
+
 
 int main()
 {
 	int array[10];
-	int count=0;
-	count++;
-	enque(5,array,count);
-	count++;
-	enque(2,array,count);
-	count++;
-	enque(8,array,count);
-	count++;
-	enque(1,array,count);
-	count++;
-	enque(3,array,count);
-	count++;
-	enque(7,array,count);
-	printf("Queue : ");
-	int i;
-	for (i=1; i<=count; ++i)
-    	printf("%d ",array[i]);
-    count--;
-    dequeue(array,count);
-    printf("\nQueue after deletion : ");
-	for (i=1; i<=count; ++i)
-    	printf("%d ",array[i]);
-    getTheHighest(array,count);
-    
+	int ch,val;
+	while(1)
+	{
+		printf("\nEnter the operataion\n");
+		printf("1.Insert to queue\n2.Delete the highest\n3.Get the highest value\n4.Print Queue\nAny other to exit\n");
+		printf("Operataion : ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				printf("Enter the value : ");
+				scanf("%d",&val);
+				count++;
+				enque(val,array,count);
+				break;
+			case 2:
+				count--;
+				dequeue(array,count);
+				printf("Queue after deletion : ");
+				for (i=1; i<=count; ++i)
+    				printf("%d ",array[i]);
+    			printf("\n");
+				break;
+			case 3:
+				getTheHighest(array,count);
+				break;
+			case 4:
+				printf("Queue : ");
+				int i;
+				for (i=1; i<=count; ++i)
+			    	printf("%d ",array[i]);
+			    printf("\n");
+			    break;
+			default:
+				return 1;
+		}
+	}   
 }
 
